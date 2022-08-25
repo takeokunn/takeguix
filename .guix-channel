@@ -1,6 +1,7 @@
 (channel
  (version 0)
  (url "https://github.com/takeokunn/takeguix")
+ (branch "main")
  (dependencies
   (channel
    (name nonguix)
