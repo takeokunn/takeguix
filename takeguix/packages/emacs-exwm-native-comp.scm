@@ -1,8 +1,8 @@
-(define-public emacs-exwm
+(define-public emacs-exwm-native-comp
   (package
-   (name "emacs-exwm")
+   (name "emacs-exwm-native-comp")
    (version "0.26")
-   (synopsis "Emacs X window manager")
+   (synopsis "Emacs X window manager with native-comp")
    (source
     (origin
      (method url-fetch)
