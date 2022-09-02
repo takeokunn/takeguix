@@ -131,7 +131,7 @@
    ;; scroll-bar-mode, fringe-mode
    ;; x-display-pixel-width, x-display-pixel-height
    (arguments
-    `(#:emacs ,emacs-with-native-comp
+    `(#:emacs ,emacs
               #:phases
               (modify-phases %standard-phases
                              (add-after 'build 'install-xsession
