@@ -38,14 +38,14 @@
   (package
    (name "php-74")
    (version "7.4.30")
-   (home-page "https://www.php.net/")
+   (home-page "https://secure.php.net/")
    (source (origin
             (method url-fetch)
             (uri (string-append home-page "distributions/"
                                 "php-" version ".tar.xz"))
             (sha256
              (base32
-              "ea72a34f32c67e79ac2da7dfe96177f3c451c3eefae5810ba13312ed398ba70d"))
+              "03d7icwys4ikl45q3rgsxv1m3i7kfxhykpx75nn7jzn6697s6wpa"))
             (patches (search-patches "php-bug-74093-test.patch"
                                      "php-curl-compat.patch"))
             (modules '((guix build utils)))
