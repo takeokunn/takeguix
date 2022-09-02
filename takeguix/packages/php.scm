@@ -384,10 +384,10 @@ systems, web content management systems and web frameworks." )
              license:bsd-2              ; ext/fileinfo/libmagic
              license:expat))))                             ; ext/date/lib
 
-(define-public php-80
+(define-public php-81
   (package
-   (name "php-80")
-   (version "8.0.23")
+   (name "php-81")
+   (version "8.1.10")
    (home-page "https://secure.php.net/")
    (source (origin
             (method url-fetch)
@@ -395,7 +395,7 @@ systems, web content management systems and web frameworks." )
                                 "php-" version ".tar.xz"))
             (sha256
              (base32
-              "03d7icwys4ikl45q3rgsxv1m3i7kfxhykpx75nn7jzn6697s6wpa"))
+              "90e7120c77ee83630e6ac928d23bc6396603d62d83a3cf5df8a450d2e3070162"))
             (patches (search-patches "php-bug-74093-test.patch"
                                      "php-curl-compat.patch"))
             (modules '((guix build utils)))
