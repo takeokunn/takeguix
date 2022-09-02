@@ -1,4 +1,4 @@
-(define-module (takeguix packages php74)
+(define-module (takeguix packages php)
   #:use-module (gnu packages)
   #:use-module (gnu packages algebra)
   #:use-module (gnu packages aspell)
@@ -34,9 +34,9 @@
   #:use-module (guix utils)
   #:use-module ((guix licenses) #:prefix license:))
 
-(define-public php74
+(define-public php-74
   (package
-    (name "php74")
+    (name "php-74")
     (version "7.4.20")
     (home-page "https://secure.php.net/")
     (source (origin

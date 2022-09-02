@@ -1,4 +1,4 @@
-(define-module (takeguix packages node16)
+(define-module (takeguix packages node)
   #:use-module (guix packages)
   #:use-module ((guix licenses)  #:prefix license:)
   #:use-module (guix download)
@@ -6,9 +6,9 @@
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages commencement))
 
-(define-public node16
+(define-public node-16
   (package
-   (name "node16")
+   (name "node-16")
    (version "16.15.0")
    (source (origin
             (method url-fetch)
