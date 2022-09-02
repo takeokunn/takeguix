@@ -393,9 +393,9 @@ systems, web content management systems and web frameworks." )
             (method url-fetch)
             (uri (string-append home-page "distributions/"
                                 "php-" version ".tar.xz"))
-            (sha256
-             (base32
-              "90e7120c77ee83630e6ac928d23bc6396603d62d83a3cf5df8a450d2e3070162"))
+            ;; (sha256
+            ;;  (base32
+            ;;   "90e7120c77ee83630e6ac928d23bc6396603d62d83a3cf5df8a450d2e3070162"))
             (patches (search-patches "php-bug-74093-test.patch"
                                      "php-curl-compat.patch"))
             (modules '((guix build utils)))
