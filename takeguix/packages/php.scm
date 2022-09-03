@@ -383,3 +383,125 @@ systems, web content management systems and web frameworks." )
              license:lgpl2.1+           ; ext/bcmath/libbcmath
              license:bsd-2              ; ext/fileinfo/libmagic
              license:expat))))                             ; ext/date/lib
+
+(define-public php-81
+  (package
+   (name "php-81")
+   (version "8.1.10")
+   (home-page "https://www.php.net/")
+   (source (origin
+            (method url-fetch)
+            (uri (string-append home-page "distributions/"
+                                "php-" version ".tar.xz"))
+            (sha256
+             (base32
+              "90e7120c77ee83630e6ac928d23bc6396603d62d83a3cf5df8a450d2e3070162"))
+            (modules '((guix build utils)))))
+   (build-system gnu-build-system)
+   (arguments
+    `(#:configure-flags
+      (let-syntax ((with (syntax-rules ()
+                           ((_ option input)
+                            (string-append option "="
+                                           (assoc-ref %build-inputs input))))))
+        (list (with "--with-bz2" "bzip2")
+              (with "--with-curl" "curl")
+              (with "--with-gdbm" "gdbm")
+              (with "--with-gettext" "libc") ; libintl.h
+              (with "--with-gmp" "gmp")
+              (with "--with-ldap" "openldap")
+              (with "--with-ldap-sasl" "cyrus-sasl")
+              (with "--with-pdo-pgsql" "postgresql")
+              (with "--with-pdo-sqlite" "sqlite")
+              (with "--with-pgsql" "postgresql")
+              ;; PHP’s Pspell extension, while retaining its current name,
+              ;; now uses the Aspell library.
+              (with "--with-pspell" "aspell")
+              (with "--with-readline" "readline")
+              (with "--with-sodium" "libsodium")
+              (with "--with-sqlite3" "sqlite")
+              (with "--with-tidy" "tidy")
+              (with "--with-xsl" "libxslt")
+              (with "--with-zlib-dir" "zlib")
+              ;; We could add "--with-snmp", but it requires netsnmp that
+              ;; we don't have a package for. It is used to build the snmp
+              ;; extension of php.
+              "--with-external-pcre"
+              "--with-external-gd"
+              "--with-iconv"
+              "--with-openssl"
+              "--with-mysqli"           ; Required for, e.g. wordpress
+              "--with-pdo-mysql"
+              "--with-zip"
+              "--with-zlib"
+              "--enable-bcmath"   ; Required for, e.g. Zabbix frontend
+              "--enable-calendar"
+              "--enable-dba=shared"
+              "--enable-exif"
+              "--enable-flatfile"
+              "--enable-fpm"
+              "--enable-ftp"
+              "--enable-gd"
+              "--enable-inifile"
+              "--enable-intl"
+              "--enable-mbstring"
+              "--enable-pcntl"
+              "--enable-sockets"))
+      #:phases
+      (modify-phases %standard-phases
+                     (add-after 'unpack 'do-not-record-build-flags
+                                (lambda _
+                                  ;; Prevent configure flags from being stored and causing
+                                  ;; unnecessary runtime dependencies.
+                                  (substitute* "scripts/php-config.in"
+                                               (("@CONFIGURE_OPTIONS@") "")
+                                               (("@PHP_LDFLAGS@") ""))
+                                  ;; This file has ISO-8859-1 encoding.
+                                  (with-fluids ((%default-port-encoding "ISO-8859-1"))
+                                               (substitute* "main/build-defs.h.in"
+                                                            (("@CONFIGURE_COMMAND@") "(omitted)"))))))))
+   (inputs
+    `(("aspell" ,aspell)
+      ("bzip2" ,bzip2)
+      ("curl" ,curl)
+      ("cyrus-sasl" ,cyrus-sasl)
+      ("gd" ,gd)
+      ("gdbm" ,gdbm)
+      ("gmp" ,gmp)
+      ("gnutls" ,gnutls)
+      ("icu4c" ,icu4c)
+      ("libgcrypt" ,libgcrypt)
+      ("libpng" ,libpng)
+      ("libsodium" ,libsodium)
+      ("libxml2" ,libxml2)
+      ("libxslt" ,libxslt)
+      ("libx11" ,libx11)
+      ("libzip" ,libzip)
+      ("oniguruma" ,oniguruma)
+      ("openldap" ,openldap)
+      ("openssl" ,openssl)
+      ("pcre" ,pcre2)
+      ("postgresql" ,postgresql)
+      ("readline" ,readline)
+      ("sqlite" ,sqlite)
+      ("tidy" ,tidy)
+      ("zlib" ,zlib)))
+   (native-inputs
+    `(("pkg-config" ,pkg-config)
+      ("bison" ,bison)
+      ("gettext" ,gettext-minimal)
+      ("procps" ,procps)))              ; for tests
+   (synopsis "PHP programming language")
+   (description
+    "PHP (PHP Hypertext Processor) is a server-side (CGI) scripting
+language designed primarily for web development but is also used as
+a general-purpose programming language.  PHP code may be embedded into
+HTML code, or it can be used in combination with various web template
+systems, web content management systems and web frameworks." )
+   (license (list
+             (license:non-copyleft "file://LICENSE") ; The PHP license.
+             (license:non-copyleft "file://Zend/LICENSE") ; The Zend license.
+             license:lgpl2.1            ; ext/mbstring/libmbfl
+             license:lgpl2.1+           ; ext/bcmath/libbcmath
+             license:bsd-2              ; ext/fileinfo/libmagic
+             license:expat))))
