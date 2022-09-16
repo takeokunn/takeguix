@@ -1,4 +1,4 @@
-(define-module (gnu packages php)
+(define-module (takeguix packages php)
   #:use-module (gnu packages)
   #:use-module (gnu packages aspell)
   #:use-module (gnu packages base)
@@ -64,7 +64,7 @@
               "--with-external-gd"
               "--with-iconv"
               "--with-openssl"
-              "--with-mysqli" 
+              "--with-mysqli"
               "--with-pdo-mysql"
               "--with-zip"
               "--with-zlib"
@@ -111,7 +111,7 @@
     `(("pkg-config" ,pkg-config)
       ("bison" ,bison)
       ("intltool" ,intltool)
-      ("procps" ,procps)))             
+      ("procps" ,procps)))
    (synopsis "PHP programming language")
    (description
     "PHP (PHP Hypertext Processor) is a server-side (CGI) scripting
@@ -120,9 +120,9 @@ a general-purpose programming language.  PHP code may be embedded into
 HTML code, or it can be used in combination with various web template
 systems, web content management systems and web frameworks." )
    (license (list
-             (license:non-copyleft "file://LICENSE")     
+             (license:non-copyleft "file://LICENSE")
              (license:non-copyleft "file://Zend/LICENSE")
-             license:lgpl2.1                             
-             license:lgpl2.1+                            
-             license:bsd-2                               
-             license:expat))))                           
+             license:lgpl2.1
+             license:lgpl2.1+
+             license:bsd-2
+             license:expat))))
