@@ -1,4 +1,4 @@
-(define-module (gnu packages php)
+(define-module (takeguix packages php)
   #:use-module (gnu packages)
   #:use-module (gnu packages algebra)
   #:use-module (gnu packages aspell)
@@ -36,7 +36,7 @@
 
 (define-public php-latest
   (package
-    (name "php")
+    (name "php-latest")
     (version "8.1.10")
     (home-page "https://www.php.net/")
     (source (origin
