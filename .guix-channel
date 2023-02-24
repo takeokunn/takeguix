@@ -1,6 +1,5 @@
 (channel
  (version 0)
- (branch "main")
  (url "https://github.com/takeokunn/takeguix")
  (dependencies
   (channel
